@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { ethers } = require('ethers');
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 // Import routes
 const sellerRoute = require('./routes/seller.route.js');
