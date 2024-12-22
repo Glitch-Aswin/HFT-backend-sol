@@ -6,6 +6,52 @@ const { setBuyerAddress, mintNft } = require('../controllers/mint');
 const agencyAddress = process.env.AGENCY_ADDRESS;  // AGENCY PUBLIC KEY // hardcoded for now
 
 // Success route - Handle buyer address, seller ID, and token URI for NFT minting and ETH distribution
+app.get('/failure', (req, res) => {
+    const failureReason = true;
+  
+    if (failureReason) {
+        // If failure reason is provided, send a failure response
+        res.status(400).json({
+          msg:"payment failed"
+        });
+    }
+  });
+  
+
+
+
+  app.post('success/nft-mint', (req, res) => {
+    // Extract buyerId, sellerId, and public addresses from the request body
+    const {  sellerId, tokenURI ,buyerPublicAddress } = req.body;
+
+    // Check if all necessary fields are provided
+    if (tokenURI && sellerId && buyerPublicAddress ) {
+        // Simulate creating an NFT tokenURI (this could be dynamic in real applications)
+        
+
+        // Respond with the tokenURI, buyerId, sellerId, and public addresses
+        res.status(200).json({
+          msg:tokenURI
+        });
+    } else {
+        // If any of the required fields are missing, return an error
+        res.status(400).json({
+            status: 'failure',
+            message: 'BuyerId, SellerId and BuyerPublicAddress are required'
+        });
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
 router.post('/success', async (req, res) => {
     const { buyerAddress, sellerId, tokenUri } = req.body;  // We expect buyerAddress, sellerId, and tokenUri
 
